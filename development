@@ -1,15 +1,15 @@
 
 [control]
-control ansible_host = 172.19.85.6
+control ansible_host=172.19.85.6
 
 
 [loadbalancer]
-lb01 ansible_host = 172.19.85.38
+lb01 ansible_host=172.19.85.38
 
 [application]
-app01 ansible_host = 172.19.85.39
-app02 ansible_host = 172.19.85.40
+app01 ansible_host=172.19.85.39
+app02 ansible_host=172.19.85.40
 
 
 [database]
-db01 ansible_host = 172.19.85.41
+db01 ansible_host=172.19.85.41

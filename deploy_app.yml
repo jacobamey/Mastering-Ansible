@@ -1,0 +1,5 @@
+---
+# file: deploy_app.yml
+- hosts: webservers
+  roles:
+          - app1

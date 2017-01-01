@@ -1,0 +1,25 @@
+---
+- hosts: non-prod-dpc
+  remote_user: jamey
+  become: yes
+  tasks:
+    - name: Finish past unfinished Updates if they exist.
+      command: /usr/sbin/yum-complete-transaction -y
+      async: 1800
+      poll: 5
+
+    - name: Clear yum cache before doing update.
+      command: /usr/bin/yum clean all
+      async: 1800
+      poll: 5
+
+    - name: Update Vulnerable packages.
+      command: /usr/bin/yum update -y {{item}}
+      async: 1800
+      poll: 5
+      with_items:
+          - kernel
+          - kernel-devel
+          - kernel-firmware
+          - kernel-headers
+          - kernel-debug

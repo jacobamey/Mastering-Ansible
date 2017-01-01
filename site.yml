@@ -1,0 +1,6 @@
+---
+- include: webserver.yml
+  include: dbservers.yml
+
+- include: deploy_app.yml
+

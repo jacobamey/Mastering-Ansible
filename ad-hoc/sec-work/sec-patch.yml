@@ -1,0 +1,28 @@
+---
+- hosts: prod-dpc non-prod-dpc
+  remote_user: jamey
+  become: yes
+  tasks:
+  - name: update packages
+    yum: name={{item}} state=present update_cache=yes
+    with_items:
+          - glibc
+          - glibc-common
+          - glibc-devel
+          - glibc-headers
+          - openssl
+          - openssl-devel
+          - git
+          - perl-Git
+          - java-1.7.0-openjdk
+          - java-1.7.0-openjdk-devel
+          - ImageMagick
+          - libxml2
+          - kernel
+          - kernel-devel
+          - kernel-firmware
+          - kernel-headers
+          - java-1.6.0-openjdk
+          - java-1.6.0-openjdk-devel
+          - java-1.8.0-openjdk
+          - java-1.8.0-openjdk-headless

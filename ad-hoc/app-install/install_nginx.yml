@@ -1,0 +1,16 @@
+---
+- name: NGINX | Installing NGINX repo rpm
+  	sudo: yes
+
+  	yum: name=http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
+- name: NGINX | Installing NGINX
+  	sudo: yes
+  	yum: name=nginx state=latest
+
+- name: NGINX | Setting up Configs
+	sudo: yes
+	file: group=nginx  mode=644  owner=nginx  path=/etc/nginx  recurse=yes
+
+- name: NGINX | Starting NGINX
+  	service: name=nginx state=started

@@ -1,10 +1,7 @@
 ---
-- hosts: dbservers
-
+- hosts: database
+  become: true
   tasks:
-
-  - name: install mysql
-    yum: name=mysql-server state=present update_cache=yes
-
-
-
+  # In Centos 7 mysql is no longer defaultly available you must use mariadb
+  - name: install mariadb
+    yum: name=mariadb-server state=present update_cache=yes

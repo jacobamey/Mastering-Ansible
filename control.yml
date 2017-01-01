@@ -1,0 +1,9 @@
+---
+- hosts: control
+  become: true
+  tasks:
+  # had to install python-dnf first
+  - name: Install tools
+    dnf: name={{item}} state=present
+    with_items:
+    - curl

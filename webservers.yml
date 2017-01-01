@@ -10,3 +10,6 @@
     - mod_wsgi
     - python2-pip
     - python-virtualenv
+
+  - name: ensure Apache started
+    service: name=httpd state=started enabled=yes

@@ -5,3 +5,6 @@
   # In Centos 7 mysql is no longer defaultly available you must use mariadb
   - name: install mariadb
     yum: name=mariadb-server state=present update_cache=yes
+
+  - name: ensure Mariadb started
+    service: name=mariadb state=started enabled=yes

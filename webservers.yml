@@ -1,5 +1,12 @@
 ---
-- hosts: webservers
-  roles:
-          - common
-          - nginx
+- hosts: webserver
+  become: true
+  tasks:
+  # needed to install epel-release first.
+  - name: Install web components
+    yum: name={{item}} state=present update_cache=yes
+    with_items:
+    - httpd
+    - mod_wsgi
+    - python2-pip
+    - python-virtualenv

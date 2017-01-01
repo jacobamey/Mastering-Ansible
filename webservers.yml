@@ -26,6 +26,10 @@
     copy: src=/var/ansible/demo/demo.conf dest=/etc/httpd/sites-available mode=0755
     notify: restart httpd
 
+  - name: setup python virtual environment
+    pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv 
+    notify: restart httpd
+
   handlers:
   - name: restart httpd
     service: name=httpd state=restarted

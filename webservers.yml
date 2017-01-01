@@ -18,6 +18,14 @@
     apache2_module: state=present name=wsgi
     notify: restart httpd
 
+  - name: copy demo app source
+    copy: src=/var/ansible/demo/app/ dest=/var/www/demo mode=0755
+    notify: restart httpd
+
+  - name: copy Apache virtual host config
+    copy: src=/var/ansible/demo/demo.conf dest=/etc/httpd/sites-available mode=0755
+    notify: restart httpd
+
   handlers:
   - name: restart httpd
     service: name=httpd state=restarted

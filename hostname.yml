@@ -1,0 +1,9 @@
+---
+
+- name: Gather hosts for use
+  hosts: all
+
+  tasks:
+
+  - name: get server hostname
+    command: hostname

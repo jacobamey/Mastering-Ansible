@@ -1,8 +1,10 @@
 ---
 - hosts: dbservers
-  roles:
-          - common
-          - mariadb
+
+  tasks:
+
+  - name: install mysql
+    yum: name=mysql-server state=present update_cache=yes
 
 
 

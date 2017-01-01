@@ -7,9 +7,9 @@ control ansible_host = 172.19.85.6
 lb01 ansible_host = 172.19.85.38
 
 [application]
-app01 ansible_host = 172.19.85.
-app02 ansible_host = 172.19.85.
+app01 ansible_host = 172.19.85.39
+app02 ansible_host = 172.19.85.40
 
 
 [database]
-db01 ansible_host = 172.19.85.
+db01 ansible_host = 172.19.85.41

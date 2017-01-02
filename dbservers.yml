@@ -27,7 +27,7 @@
     mysql_db: name=demo state=present
 
   - name: create demo user remote
-    mysql_user: name=demo password=demo priv=demo.*:ALL,grant host='%' state=present
+    mysql_user: name=demo password=demo priv=demo.*:ALL host='%' state=present
 
   - name: create demo user local
     mysql_user: name=demo password=demo priv=demo.*:ALL,grant host='localhost' state=present

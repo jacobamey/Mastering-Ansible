@@ -2,6 +2,13 @@
 - hosts: webserver
   become: true
   tasks:
+
+  - name: add db01 to hosts file for dns recognition
+    lineinfile: dest=/etc/hosts line='172.19.85.41 db01'
+
+  - name: add lb01 to hosts file for dns recognition
+    lineinfile: dest=/etc/hosts line='172.19.85.38 lb01'
+
   # needed to install epel-release first.
   - name: Install web components
     yum: name={{item}} state=present update_cache=yes
@@ -10,6 +17,7 @@
     - mod_wsgi
     - python2-pip
     - python-virtualenv
+    - MySQL-python
 
   - name: ensure Apache started
     service: name=httpd state=started enabled=yes

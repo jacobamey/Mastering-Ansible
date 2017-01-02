@@ -15,6 +15,9 @@
   - name: add app02 to hosts file for dns recognition
     lineinfile: dest=/etc/hosts line='172.19.85.40 app02'
 
+  - name: add db01 to hosts file for dns recognition
+    lineinfile: dest=/etc/hosts line='172.19.85.41 db01'
+
   - name: deactivate default nginx site
     file: path=/usr/share/nginx/html/index.html state=absent
     notify: restart nginx

@@ -17,6 +17,10 @@
         172.19.85.40 app02
         172.19.85.41 db01
 
+  - name: ensure mysql listening on all ports
+    lineinfile: dest=/etc/my.cnf.d/server.cnf regexp=^bind-address line="bind-address={{ansible_default_ipv4.address}}"
+    notify: restart mariadb
+
   - name: ensure Mariadb started
     service: name=mariadb state=started enabled=yes
 

@@ -27,7 +27,7 @@
     command: service mariadb status
 
   - name: verify mariadb is listening on 3306
-    wait_for: port=3306 timeout=1
+    wait_for: host={{ansible_default_ipv4.address}} port=3306 timeout=1
 
 - hosts: control
   become: true

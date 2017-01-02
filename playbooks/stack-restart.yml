@@ -20,7 +20,7 @@
   tasks:
   - name: restarting databases
     service: name=mariadb state=restarted
-    wait_for: port=3306 state=started
+    wait_for: host={{ansible_default_ipv4.address}} port=3306 state=started
 
 # Bring stack back up
 - hosts: webserver

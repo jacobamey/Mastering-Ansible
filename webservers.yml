@@ -22,12 +22,28 @@
     copy: src=/var/ansible/demo/app/ dest=/var/www/demo mode=0755
     notify: restart httpd
 
+  - name: Make sites-enabled recognized in apache conf
+    lineinfile: dest=/etc/httpd/conf/httpd.conf line='IncludeOptional sites-enabled/*.conf'
+    notify: restart httpd
+
   - name: copy Apache virtual host config
-    copy: src=/var/ansible/demo/demo.conf dest=/etc/httpd/sites-available mode=0755
+    copy: src=/var/ansible/demo/demo.conf dest=/etc/httpd/sites-available/ mode=0755
     notify: restart httpd
 
   - name: setup python virtual environment
-    pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv 
+    pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+    notify: restart httpd
+
+  - name: ensure sites enabled dir exists
+    file: path=/etc/httpd/sites-enabled/ state=directory
+    notify: restart httpd
+
+  - name: deactivate default apache site
+    file: path=/etc/httpd/conf.d/welcome.conf state=absent
+    notify: restart httpd
+
+  - name: activate demo apache site
+    file: src=/etc/httpd/sites-available/demo.conf dest=/etc/httpd/sites-enabled/demo.conf state=link
     notify: restart httpd
 
   handlers:

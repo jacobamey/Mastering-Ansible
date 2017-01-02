@@ -3,25 +3,22 @@
   become: true
   tasks:
   # In Centos 7 mysql is no longer defaultly available you must use mariadb
-  - name: Install Pre reqs and tools
+  - name: Install Pre reqs and mariadb
     yum: name={{item}} state=present update_cache=yes
     with_items:
     - MySQL-python
-
-  - name: install mariadb
-    yum: name=mariadb-server state=present update_cache=yes
+    - mariadb-server
 
   - name: ensure Mariadb started
     service: name=mariadb state=started enabled=yes
 
-  - name: add app01 to hosts file for dns recognition
-    lineinfile: dest=/etc/hosts line='172.19.85.39 app01'
-
-  - name: add app02 to hosts file for dns recognition
-    lineinfile: dest=/etc/hosts line='172.19.85.40 app02'
-
-  - name: add lb01 to hosts file for dns recognition
-    lineinfile: dest=/etc/hosts line='172.19.85.38 lb01'
+  - name: Add servers to /etc/hosts for local dns
+    blockinfile:
+      dest: /etc/hosts
+      block: |
+        172.19.85.38 lb01
+        172.19.85.39 app01
+        172.19.85.40 app02
 
   - name: create demo database.
     mysql_db: name=demo state=present

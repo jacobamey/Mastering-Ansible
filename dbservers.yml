@@ -16,9 +16,11 @@
     blockinfile:
       dest: /etc/hosts
       block: |
+        172.19.85.6  contorl
         172.19.85.38 lb01
         172.19.85.39 app01
         172.19.85.40 app02
+        172.19.85.41 db01
 
   - name: create demo database.
     mysql_db: name=demo state=present

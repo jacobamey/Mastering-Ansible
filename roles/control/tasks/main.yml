@@ -1,7 +1,5 @@
 ---
-- hosts: control
-  become: true
-  tasks:
+# tasks file for control
   # had to install python-dnf first
   - name: Install tools
     dnf: name={{item}} state=present

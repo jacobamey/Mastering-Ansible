@@ -33,6 +33,5 @@
     file: path=/etc/httpd/conf.d/welcome.conf state=absent
     notify: restart httpd
 
- - name: ensure Apache started
+  - name: ensure Apache started
     service: name=httpd state=started enabled=yes
-

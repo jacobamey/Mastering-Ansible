@@ -1,6 +1,5 @@
 ---
-- include: webserver.yml
-  include: dbservers.yml
-
-- include: deploy_app.yml
-
+  - include: playbooks/control.yml
+  - include: playbooks/dbservers.yml
+  - include: playbooks/webservers.yml
+  - include: playbooks/loadbalancer.yml

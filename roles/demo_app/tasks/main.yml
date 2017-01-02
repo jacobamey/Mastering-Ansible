@@ -8,15 +8,15 @@
     - MySQL-python
 
   - name: copy demo app source
-    copy: src=/demo/app/ dest=/var/www/demo mode=0755
+    copy: src=files/demo/app/ dest=/var/www/demo mode=0755
     notify: restart httpd
 
   - name: copy Apache virtual host config
-    copy: src=/demo/demo.conf dest=/etc/httpd/sites-available/ mode=0755
+    copy: src=files/demo/demo.conf dest=/etc/httpd/sites-available/ mode=0755
     notify: restart httpd
 
   - name: setup python virtual environment
-    pip: requirements=/demo/requirements.txt virtualenv=/var/www/demo/.venv
+    pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
     notify: restart httpd
 
   - name: activate demo apache site

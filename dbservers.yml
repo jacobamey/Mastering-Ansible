@@ -25,11 +25,15 @@
 
   - name: create demo database.
     mysql_db: name=demo state=present
-    notify: restart mariadb
 
-  - name: create demo user
-    mysql_user: name=demo password=demo priv=demo.*:ALL host='%' state=present
-    notify: restart mariadb
+  - name: create demo user remote
+    mysql_user: name=demo password=demo priv=demo.*:ALL,grant host='%' state=present
+
+  - name: create demo user local
+    mysql_user: name=demo password=demo priv=demo.*:ALL,grant host='localhost' state=present
+
+  - name: create demo user local ip
+    mysql_user: name=demo password=demo priv=demo.*:ALL,grant host='127.0.0.1' state=present
 
   handlers:
   - name: restart mariadb

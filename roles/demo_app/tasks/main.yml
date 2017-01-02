@@ -1,2 +1,24 @@
 ---
 # tasks file for demo_app
+  - name: Install web components
+    yum: name={{item}} state=present update_cache=yes
+    with_items:
+    - python2-pip
+    - python-virtualenv
+    - MySQL-python
+
+  - name: copy demo app source
+    copy: src=/demo/app/ dest=/var/www/demo mode=0755
+    notify: restart httpd
+
+  - name: copy Apache virtual host config
+    copy: src=/demo/demo.conf dest=/etc/httpd/sites-available/ mode=0755
+    notify: restart httpd
+
+  - name: setup python virtual environment
+    pip: requirements=/demo/requirements.txt virtualenv=/var/www/demo/.venv
+    notify: restart httpd
+
+  - name: activate demo apache site
+    file: src=/etc/httpd/sites-available/demo.conf dest=/etc/httpd/sites-enabled/demo.conf state=link
+    notify: restart httpd

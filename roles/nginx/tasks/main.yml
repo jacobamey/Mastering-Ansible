@@ -29,9 +29,19 @@
     copy: src=nginx.conf dest=/etc/nginx/ mode=0644
     notify: restart nginx
 
+  - name: get active sites
+    shell: ls -l /etc/nginx/conf.d
+    register: active
+
+  - name: de-activate sites
+    file: path=/etc/nginx/conf.d/{{ item }} state=absent
+    with_items: "{{ active.stdout_lines }}"
+    when: item not in "{{ sites }}"
+    notify: restart nginx
 
   - name: configure nignx site
-    template: src=nginx.conf.j2 dest=/etc/nginx/conf.d/demo.conf mode=0644
+    template: src=nginx.conf.j2 dest=/etc/nginx/conf.d/{{ item.key }} mode=0644
+    with_dict: "{{ sites }}"
     notify: restart nginx
 
   - name: ensure nginx started

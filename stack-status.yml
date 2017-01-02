@@ -28,3 +28,29 @@
 
   - name: verify mariadb is listening on 3306
     wait_for: port=3306 timeout=1
+
+- hosts: control
+  become: true
+  tasks:
+  - name: verify end-to-end responce
+    uri: uri=http://{{item}} return_content=yes
+    with_items: groups.loadbalancer
+    register: lb_index
+
+  - name: checking for failure
+    fail: msg="index failed to return content"
+    when: "'Hello, from sunny' not in item.content"
+    with_items: "{{lb_index.results}}"
+
+- hosts: loadbalancer
+  become: true
+  tasks:
+  - name: verify backend responce
+    uri: uri=http://{{item}} return_content=yes
+    with_items: groups.webserver
+    register: app_index
+
+  - name: checking for failure
+    fail: msg="index failed to return content"
+    when: "'Hello, from sunny{{item.item}}' not in item.content"
+    with_items: "{{app_index.results}}"

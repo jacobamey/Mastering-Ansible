@@ -2,7 +2,7 @@
 # tasks file for mariadb
   # In Centos 7 mysql is no longer defaultly available you must use mariadb
   - name: Install Pre reqs and mariadb
-    yum: name={{item}} state=present update_cache=yes
+    yum: name={{item}} state=present
     with_items:
     - MySQL-python
     - mariadb-server

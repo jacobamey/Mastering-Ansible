@@ -1,5 +1,12 @@
 ---
-  - include: playbooks/control.yml
-  - include: playbooks/dbservers.yml
-  - include: playbooks/webservers.yml
-  - include: playbooks/loadbalancer.yml
+- hosts: /!control
+  become: true
+  gather_facts: False
+  tasks:
+    - name: update cache
+      yum: update_cache=yes cache_valid_time=86400
+
+- include: playbooks/control.yml
+- include: playbooks/dbservers.yml
+- include: playbooks/webservers.yml
+- include: playbooks/loadbalancer.yml

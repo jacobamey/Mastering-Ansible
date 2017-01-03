@@ -1,7 +1,7 @@
 ---
 # tasks file for demo_app
   - name: Install web components
-    yum: name={{item}} state=present update_cache=yes
+    yum: name={{item}} state=present
     with_items:
     - python2-pip
     - python-virtualenv

@@ -12,7 +12,7 @@
         172.19.85.41 db01
 
   - name: Install web components
-    yum: name={{item}} state=present update_cache=yes
+    yum: name={{item}} state=present
     with_items:
     - httpd
     - mod_wsgi

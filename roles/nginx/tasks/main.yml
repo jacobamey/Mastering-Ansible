@@ -12,7 +12,7 @@
 
   # Needed to install epel-release first
   - name: install nginx and tools
-    yum: name={{item}} state=present update_cache=yes
+    yum: name={{item}} state=present
     with_items:
     - nginx
     - python-httplib2

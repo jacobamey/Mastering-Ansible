@@ -8,6 +8,7 @@
   tasks:
   - name: verify nginx service
     command: service nginx status
+    changed_when: False
 
   - name: verify nginx is listening on 80
     wait_for: port=80 timeout=1
@@ -18,6 +19,7 @@
   tasks:
   - name: verify apache service
     command: service httpd status
+    changed_when: False
 
   - name: verify apache is listening on 80
     wait_for: port=80 timeout=1
@@ -27,6 +29,7 @@
   tasks:
   - name: verify mariadb service
     command: service mariadb status
+    changed_when: False
 
   - name: verify mariadb is listening on 3306
     wait_for: host={{ansible_default_ipv4.address}} port=3306 timeout=1
@@ -36,7 +39,7 @@
   gather_facts: False
   tasks:
   - name: verify end-to-end responce
-    uri: uri=http://{{item}} return_content=yes
+    uri: uri=http://{{ item }} return_content=yes
     with_items: groups.loadbalancer
     register: lb_index
 

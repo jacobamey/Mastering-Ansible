@@ -6,6 +6,7 @@
     - python2-pip
     - python-virtualenv
     - MySQL-python
+    tags: [ 'packages' ]
 
   - name: copy demo app source
     copy: src=files/demo/app/ dest=/var/www/demo mode=0755

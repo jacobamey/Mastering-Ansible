@@ -6,6 +6,7 @@
     with_items:
     - MySQL-python
     - mariadb-server
+    tags: [ 'packages' ]
 
   - name: Add servers to /etc/hosts for local dns
     blockinfile:

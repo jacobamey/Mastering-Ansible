@@ -2,6 +2,7 @@
 # Bring Stack down
 - hosts: loadbalncer
   become: true
+  gather_facts: False
   tasks:
   - name: stopping loadbalncers
     service: name=nginx state=stopped
@@ -9,6 +10,7 @@
 
 - hosts: webserver
   become: true
+  gather_facts: False
   tasks:
   - name: stopping webservers
     service: name=httpd state=stopped
@@ -25,6 +27,7 @@
 # Bring stack back up
 - hosts: webserver
   become: true
+  gather_facts: False
   tasks:
   - name: starting webservers
     service: name=httpd state=started
@@ -32,6 +35,7 @@
 
 - hosts: loadbalncer
   become: true
+  gather_facts: False
   tasks:
   - name: starting loadbalancer
    service: name=nginx state=started

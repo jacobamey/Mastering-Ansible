@@ -4,6 +4,7 @@
 #
 - hosts: loadbalancer
   become: true
+  gather_facts: False
   tasks:
   - name: verify nginx service
     command: service nginx status
@@ -13,6 +14,7 @@
 
 - hosts: webserver
   become: true
+  gather_facts: False
   tasks:
   - name: verify apache service
     command: service httpd status
@@ -31,6 +33,7 @@
 
 - hosts: control
   become: true
+  gather_facts: False
   tasks:
   - name: verify end-to-end responce
     uri: uri=http://{{item}} return_content=yes
@@ -44,6 +47,7 @@
 
 - hosts: loadbalancer
   become: true
+  gather_facts: False
   tasks:
   - name: verify backend responce
     uri: uri=http://{{item}} return_content=yes

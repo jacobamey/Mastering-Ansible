@@ -1,6 +1,6 @@
 ---
-- hosts: prod-dpc non-prod-dpc
-  remote_user: jamey
+- hosts: prod non-prod
+  remote_user: ansible
   become: yes
   tasks:
   - name: update packages

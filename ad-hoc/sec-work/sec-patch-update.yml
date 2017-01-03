@@ -1,6 +1,6 @@
 ---
-- hosts: non-prod-dpc
-  remote_user: jamey
+- hosts: non-prod
+  remote_user: ansible
   become: yes
   tasks:
     - name: Finish past unfinished Updates if they exist.

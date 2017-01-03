@@ -1,15 +1,5 @@
 ---
 # tasks file for nginx
-  - name: Add servers to /etc/hosts for local dns
-    blockinfile:
-      dest: /etc/hosts
-      block: |
-        172.19.85.6  contorl
-        172.19.85.38 lb01
-        172.19.85.39 app01
-        172.19.85.40 app02
-        172.19.85.41 db01
-
   # Needed to install epel-release first
   - name: install nginx and tools
     yum: name={{item}} state=present

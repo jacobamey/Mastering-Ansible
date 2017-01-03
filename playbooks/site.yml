@@ -3,11 +3,21 @@
   become: true
   gather_facts: False
   tasks:
-    - name: update cache
-      yum: update_cache=yes cache_valid_time=86400
-      tags: [ 'packages' ]
+  - name: Add servers to /etc/hosts for local dns
+    blockinfile:
+      dest: /etc/hosts
+      block: |
+        172.19.85.6  contorl
+        172.19.85.38 lb01
+        172.19.85.39 app01
+        172.19.85.40 app02
+        172.19.85.41 db01
 
-- include: playbooks/control.yml
-- include: playbooks/dbservers.yml
-- include: playbooks/webservers.yml
-- include: playbooks/loadbalancer.yml
+  - name: update cache
+    yum: update_cache=yes cache_valid_time=86400
+    tags: [ 'packages' ]
+
+- include: control.yml
+- include: dbservers.yml
+- include: webservers.yml
+- include: loadbalancer.yml
